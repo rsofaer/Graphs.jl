@@ -15,6 +15,14 @@ type GenericIncidenceList{V, E, VList, IncList} <: AbstractGraph{V, E}
     vertices::VList
     nedges::Int
     inclist::IncList
+
+    attributes::GraphAttributes{V,E}
+
+    GenericIncidenceList(is_directed::Bool, vertices::VList, nedges::Int, inclist::IncList) =
+        new(is_directed, vertices, nedges, inclist, GraphAttributes{V,E}())
+    GenericIncidenceList(is_directed::Bool, vertices::VList, nedges::Int, inclist::IncList,
+        attributes::GraphAttributes{V,E}) = 
+        new(is_directed, vertices, nedges, inclist, attributes)
 end
 
 typealias SimpleIncidenceList GenericIncidenceList{Int, IEdge, Range1{Int}, Vector{Vector{IEdge}}}
@@ -38,6 +46,8 @@ out_degree(v, g::GenericIncidenceList) = length(g.inclist[vertex_index(v)])
 out_edges(v, g::GenericIncidenceList) = g.inclist[vertex_index(v)]
 
 out_neighbors(v, g::GenericIncidenceList) = out_neighbors_proxy(g.inclist[vertex_index(v)])
+
+attributes(g::GenericIncidenceList) = g.attributes
 
 # mutation
 

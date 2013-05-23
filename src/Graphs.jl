@@ -81,10 +81,14 @@ module Graphs
         to_dot, plot,
         
         # Random Graph Generation
-        erdos_renyi_graph, watts_strogatz_graph
+        erdos_renyi_graph, watts_strogatz_graph,
+
+        # Attributes
+        GraphAttributes, attributes, graph_attributes, vertex_attributes, edge_attributes
         
     include("concepts.jl")
     include("common.jl")
+    include("attributes.jl")
     
     include("adjacency_list.jl")
     include("incidence_list.jl")
